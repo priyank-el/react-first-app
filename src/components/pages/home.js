@@ -9,14 +9,17 @@ function Home() {
 
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/users")
-      .then(res => setUsers(res.data))
+      .then(res => {
+          setUsers(res.data)
+      })
       .catch((error) => setError(error.message))
   }, []
   )
-  console.log(error);
+  console.log("error"+error.message);
 
   return (
-    <>{
+    <>
+    {
       users.length > 0
         ? <div className="flex justify-center">
           <div class="grid grid-cols-3 divide-x w-11/12">
@@ -31,7 +34,18 @@ function Home() {
             ))}
           </div>
         </div>
-        : <MagnifyingGlass />
+        :   
+        <div>
+            {
+              users.length == 0
+              ? <div>
+                  <MagnifyingGlass />
+                  <h2 className="mb-4 leading-none tracking-tight text-red-900 md:text-5xl lg:text-6xl">User not found..</h2>
+                </div>
+              : <MagnifyingGlass />
+            }
+        </div> 
+        
     }
     </>
   );
