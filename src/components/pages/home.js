@@ -14,17 +14,25 @@ function Home() {
   }, []
   )
   console.log(error);
-  
+
   return (
-    <>
-      <div class="grid divide-x-2 text-center">
-        {users.map(user => (
-          <div key={user.name}>
-            <p>{user.name}</p>
-            <p>{user.address}</p>
+    <>{
+      users.length > 0
+        ? <div className="flex justify-center">
+          <div class="grid grid-cols-3 divide-x w-11/12">
+            {users.map(user => (
+              <div className="my-1.5" key={user.name}>
+                <a href="#" class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                  <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{user.name}</h5>
+                  <p class="font-normal text-gray-700 dark:text-gray-400">{user.username}</p>
+                  <p class="font-normal text-gray-700 dark:text-gray-400">{user.email}</p>
+                </a>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+        : <MagnifyingGlass />
+    }
     </>
   );
 }
